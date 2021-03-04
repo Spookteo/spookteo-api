@@ -1,0 +1,20 @@
+
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": false,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "target": "es6",
+      "experimentalDecorators": true,
+      "noImplicitAny": false,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist"
+    },
+    "include": [
+      "src/**/*",
+      "index.ts",
+      "app.ts"
+    ]
+  }
