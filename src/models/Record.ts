@@ -1,4 +1,3 @@
-import { recordRepository } from "../repository";
 import { RecordInfos } from "../types";
 
 export default function buildMakeRecord({}) {
