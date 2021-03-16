@@ -13,7 +13,7 @@ export interface UserInfos {
     _id?:string;
     username:string;
     key?:string;
-    sel?:string
+    salt?:string
     role:Role;
 }
 

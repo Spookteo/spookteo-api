@@ -1,44 +1,42 @@
 import { recordRepository } from "../repository";
 import { RecordInfos } from "../types";
 
-/**
- * Record type contains data from station censors
- * 
- * @field id : unique number to identiy a record
- * @field date : moment of the record
- * @field pressure : pressure recorded by the censor
- * @field temperature : temperature recorded by the censor
- * @field hygrometry : hygrometry recorded by the censor
- *
- * @methods save : save a record the the database
- */
-export default class Record {
+export default function buildMakeRecord({}) {
+  const isValidId = (id: string) => true;
+  const isValidDate = (date: Date) => true;
+  const isValidPressure = (pressure: number) => true;
+  const isValidTemperature = (temperature: number[]) => true;
+  const isValidHygrometry = (hygrometry: number) => true;
 
-    _id?:string;
-    date:Date;
-    pressure:number;
-    temperature:Array<number>;
-    hygrometry:number;
-
-    constructor(recordInfos: RecordInfos) {
-        this._id = recordInfos._id ?? null;
-        this.date = recordInfos.date;
-        this.pressure = recordInfos.pressure;
-        this.temperature = recordInfos.temperature;
-        this.hygrometry = recordInfos.hygrometry;
+  return function makeRecord({
+    _id,
+    date,
+    pressure,
+    temperature,
+    hygrometry,
+  }: RecordInfos) {
+    if (_id && !isValidId(_id)) {
+      throw new Error("Invalid id");
+    }
+    if (!isValidDate(date)) {
+      throw new Error("Invalid id");
+    }
+    if (!isValidPressure(pressure)) {
+      throw new Error("Invalid id");
+    }
+    if (!isValidTemperature(temperature)) {
+      throw new Error("Invalid id");
+    }
+    if (!isValidHygrometry(hygrometry)) {
+      throw new Error("Invalid id");
     }
 
-
-    /**
-     * this method save a record in the database
-     * 
-     * @param void
-     * 
-     * @return void
-     */
-    async save() {
-        return await recordRepository.saveRecord({
-            ...this
-        })
-    }
+    return Object.freeze({
+        getId: () => _id,
+        getDate: () => date,
+        getPressure: () => pressure,
+        getTemperature: () => temperature,
+        getHygrometry: () => hygrometry,
+    });
+  };
 }
