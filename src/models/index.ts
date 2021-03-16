@@ -1,4 +1,5 @@
 import makeId from "./makeId";
+import ResponseError from "./ResponseError";
 import buildMakeUser from "./User";
 
 /**
@@ -27,7 +28,9 @@ const makeUser = buildMakeUser({makeId});
  */
 const makeRecord = buildMakeUser({makeId});
 
+
 export {
     makeUser,
-    makeRecord
+    makeRecord,
+    ResponseError
 };
