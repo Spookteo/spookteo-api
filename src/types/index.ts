@@ -1,3 +1,4 @@
+import { Request } from "express";
 // interfaces
 
 export interface RecordInfos {
@@ -24,3 +25,5 @@ export enum Role {
     WRITE = "WRITE",
     READ = "READ"
 }
+
+export type AuthenticatedRequest = Request & {user: {userId: string, role: string}};
