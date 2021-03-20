@@ -9,6 +9,7 @@
  *
  * @methods save : create a new user in the database with the information in the object
  */
+
 export default function buildMakeUser({makeId}: {makeId: () => string}, generateSalt) {
     const isValidId = (id: string) => true;
     const isValidUsername = (username: string) => true;
