@@ -1,6 +1,8 @@
+import { generateSalt } from "../tools/ecryptData";
 import makeId from "./makeId";
 import ResponseError from "./ResponseError";
 import buildMakeUser from "./User";
+
 
 /**
  * Generate a user object
@@ -13,7 +15,7 @@ import buildMakeUser from "./User";
  *
  * @methods save : create a new user in the database with the information in the object
  */
-const makeUser = buildMakeUser({makeId});
+const makeUser = buildMakeUser({makeId}, generateSalt);
 
 /**
  * Record type contains data from station censors
@@ -26,7 +28,7 @@ const makeUser = buildMakeUser({makeId});
  *
  * @methods save : save a record the the database
  */
-const makeRecord = buildMakeUser({makeId});
+const makeRecord = buildMakeUser({makeId}, generateSalt);
 
 
 export {

@@ -1,8 +1,3 @@
-import { userRepository } from "../repository";
-import { generateSalt } from "../tools/ecryptData";
-import { UserInfos, Role } from "../types";
-
-
 /**
  * User type contains all the user informations
  * 
@@ -14,7 +9,7 @@ import { UserInfos, Role } from "../types";
  *
  * @methods save : create a new user in the database with the information in the object
  */
-export default function buildMakeUser({makeId}: {makeId: () => string}) {
+export default function buildMakeUser({makeId}: {makeId: () => string}, generateSalt) {
     const isValidId = (id: string) => true;
     const isValidUsername = (username: string) => true;
     const isValidKey = (key: string) => true;
@@ -24,10 +19,10 @@ export default function buildMakeUser({makeId}: {makeId: () => string}) {
     return function makeUser ({
         _id = makeId(),
         username,
-        key,
-        salt,
+        key = generateSalt(256),
+        salt = generateSalt(64),
         role
-    }: UserInfos)  {
+    })  {
         if (_id && !isValidId(_id)) {
             throw Error("Invalid id");
         }
@@ -47,8 +42,8 @@ export default function buildMakeUser({makeId}: {makeId: () => string}) {
         return Object.freeze({
             getId: () => _id,
             getUsername: () => username,
-            getKey: () => key ?? (key = generateSalt(256)),
-            getSalt: () => salt ?? (salt = generateSalt(64)),
+            getKey: () => key,
+            getSalt: () => salt,
             getRole: () => role,
         });
 
