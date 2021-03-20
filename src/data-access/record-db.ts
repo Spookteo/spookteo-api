@@ -6,8 +6,6 @@ interface GetRecordsOptions {
 
 }
 
-const RECORD_COLLECTION = 'records';
-
 interface MakeRecordDbOptions {
     makeDb: () => Promise<Db>;
     collection: string;
@@ -18,7 +16,7 @@ export default function makeRecordDb({makeDb, collection}: MakeRecordDbOptions) 
     return Object.freeze({
         saveRecord,
         getRecords
-    })
+    });
     
 
     /**
