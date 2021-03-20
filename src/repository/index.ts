@@ -25,15 +25,3 @@ export async function makeDb() {
     }
     return client.db(dbName)
 }
-
-/**
- * This repository  contains all functions to interact with the 
- * records table in the mongodb database
- */
-const recordRepository = new RecordRepository({makeDb});
-const userRepository = new UserRepository({makeDb});
-
-export {
-    recordRepository,
-    userRepository
-}
