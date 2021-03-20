@@ -18,6 +18,7 @@ export default function makeUserDb({makeDb, collection}: {makeDb: () => Promise<
             role: user.getRole()
         });
 
+        // ! WARNING `res`type is `InsertOneWriteOpResult<any>`
         return await res;
     }
 }
