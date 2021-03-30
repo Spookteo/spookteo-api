@@ -21,10 +21,10 @@ export default function makeUserDb({ makeDb, collection }: MakeUserDbOptions) {
       username: user.getUsername(),
       key: user.getKey(),
       salt: user.getSalt(),
-      role: user.getRole(),
+      role: user.getRole()
     });
 
-    return await res.ops[0];
+    return res.ops.length ? res.ops[0] : null;
   }
 
   async function getUserSalt({

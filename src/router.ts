@@ -1,53 +1,17 @@
 import { Router } from "express";
-import Record from "./models/Record";
-import User from "./models/User";
-import { recordRepository, userRepository } from "./repository";
+import { postUser } from "./controllers";
+import makeCallback from "./express-callback";
 
 
-const router = Router();
+const apiV0Router = Router();
 
-router.get('/data', async (req, res) => {
+// Users
 
-    const records = await recordRepository.getRecords({});
-    res.json(records);
-});
-router.post('/data', async (req, res) => {
-    const body = req.body;
+// create a new user
+apiV0Router.post('/user', makeCallback(postUser))
 
-    const record = new Record({
-        date: new Date(body.date),
-        pressure:body.pressure,
-        temperature:body.temperature,
-        hygrometry: body.hygrometry,
-    });
+// add new records
 
-    await record.save();
+// get gecords
 
-    res.json({c: 'ok'});
-
-});
-router.post('/user', async (req, res) => {
-    const body = req.body;
-
-    const user = new User({
-        username: body.username,
-        key: body.key,
-        role: body.role,
-    });
-
-    const newUser = await user.save();
-
-    res.json({user: { 
-        username: newUser.username,
-        key: newUser.key
-     }});
-
-});
-router.get('/user', async (req, res) => {
-    const users = await userRepository.getUsers({});
-
-    res.json(users);
-});
-router.delete('/user', (req, res) => {});
-
-export default router;
+export default apiV0Router;

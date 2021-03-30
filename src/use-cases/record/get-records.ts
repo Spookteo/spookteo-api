@@ -1,10 +1,8 @@
 import { makeUser, ResponseError } from "../../models";
 import { UserInfos } from "../../types";
 
-interface MakeAddUserOptionsInterface {
-    userDb: {
-        insert: (user:UserInfos)=>Promise<any>
-    }
+interface MakeGetRecordsOptionsInterface {
+    recordDb: any // TODO : better typing
 }
 
 /**
@@ -14,17 +12,11 @@ interface MakeAddUserOptionsInterface {
  * 
  * @return a function to add a user in the database
  */
-export default function makeAddUser({userDb}: MakeAddUserOptionsInterface) {
+export default function makeGetRecords({recordDb}: MakeGetRecordsOptionsInterface) {
     /**
-     * @brief function to add a user in the database
-     * 
-     * @param userInfo information of the user who will be created
-     * 
-     * @return a Promise with the infos of the user added to the database
-     * 
-     * @throws 500 : throws error 500 if the user cannot be register in the database
+     * TODO : comment and type !
      */
-    return async function addUser(userInfo:UserInfos):Promise<UserInfos>{
+    return async function getRecords({}:any):Promise<any[]>{
 
         // user creation with his data in parameters
         const user = makeUser(userInfo);

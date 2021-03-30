@@ -6,7 +6,11 @@ const HEX = "HEX";
 
 const CRYPT_ALGORITHME = "sha512";
 
-export function generateSalt(saltLength: number) {
+/**
+ * @param saltLength 
+ * @returns 
+ */
+export function generateRandomString(saltLength: number) {
   return (
     randomBytes(Math.ceil(saltLength / 2))
       //@ts-ignore
