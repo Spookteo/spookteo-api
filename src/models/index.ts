@@ -1,5 +1,6 @@
 import { generateRandomString } from "../tools/ecryptData";
 import makeId from "./makeId";
+import buildMakeRecord from "./Record";
 import ResponseError from "./ResponseError";
 import buildMakeUser from "./User";
 
@@ -27,7 +28,7 @@ const makeUser = buildMakeUser({makeId}, generateRandomString);
  *
  * @methods save : save a record the the database
  */
-const makeRecord = buildMakeUser({makeId}, generateRandomString);
+const makeRecord = buildMakeRecord({});
 
 
 export {
