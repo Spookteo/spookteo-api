@@ -7,6 +7,7 @@ export interface RecordInfos {
     pressure:number;
     temperature:Array<number>;
     hygrometry:number;
+    brightness:number;
 }
 
 

@@ -4,6 +4,8 @@ import { UserInfos } from "../../types";
 interface MakeAddUserOptionsInterface {
     userDb: {
         insert: (user:UserInfos)=>Promise<any>
+        getUserSalt: ({ username, }: { username: string; }) => Promise<string>;
+        doesUserExists: ({ username, key, }: { username: string; key: string; }) => Promise<any>;
     }
 }
 

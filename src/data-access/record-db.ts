@@ -2,9 +2,9 @@ import { Db } from "mongodb";
 import { RecordInfos } from "../types";
 
 
-interface GetRecordsOptions {
+export interface GetRecordsOptions {
 
-}
+} 
 
 interface MakeRecordDbOptions {
     makeDb: () => Promise<Db>;

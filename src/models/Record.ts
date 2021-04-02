@@ -6,6 +6,7 @@ export default function buildMakeRecord({}) {
   const isValidPressure = (pressure: number) => true;
   const isValidTemperature = (temperature: number[]) => true;
   const isValidHygrometry = (hygrometry: number) => true;
+  const isValidBrightness = (brightness: number) => true;
 
   return function makeRecord({
     _id,
@@ -13,6 +14,7 @@ export default function buildMakeRecord({}) {
     pressure,
     temperature,
     hygrometry,
+    brightness,
   }: RecordInfos) {
     if (_id && !isValidId(_id)) {
       throw new Error("Invalid id");
@@ -29,6 +31,9 @@ export default function buildMakeRecord({}) {
     if (!isValidHygrometry(hygrometry)) {
       throw new Error("Invalid id");
     }
+    if (!isValidBrightness(brightness)) {
+      throw new Error("Invalid brightness");
+    }
 
     return Object.freeze({
         getId: () => _id,
@@ -36,6 +41,7 @@ export default function buildMakeRecord({}) {
         getPressure: () => pressure,
         getTemperature: () => temperature,
         getHygrometry: () => hygrometry,
+        getBrightness: () => brightness,
     });
   };
 }
