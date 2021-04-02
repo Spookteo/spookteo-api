@@ -1,4 +1,3 @@
-import { response } from "express";
 import { HttpRequest } from "../types";
 
 const RESPONSE_ERROR_NAME = "ResponseError";
@@ -18,7 +17,7 @@ export default function makeCallback(
     controller(httpRequest)
       .then((data) => {
         // Success : return the response
-        return response.json({
+        return res.json({
           status: "ok",
           data,
         });
