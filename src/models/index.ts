@@ -1,8 +1,8 @@
-import { generateRandomString } from "../tools/ecryptData";
+import { encryptString, generateRandomString } from "../tools/ecryptData";
 import makeId from "./makeId";
-import buildMakeRecord from "./Record";
+import buildRecord from "./Record";
 import ResponseError from "./ResponseError";
-import buildMakeUser from "./User";
+import buildUser from "./User";
 
 /**
  * Generate a user object
@@ -15,7 +15,7 @@ import buildMakeUser from "./User";
  *
  * @methods save : create a new user in the database with the information in the object
  */
-const makeUser = buildMakeUser({makeId}, generateRandomString);
+const User = buildUser({makeId, encryptString, generateRandomString});
 
 /**
  * Record type contains data from station censors
@@ -28,11 +28,11 @@ const makeUser = buildMakeUser({makeId}, generateRandomString);
  *
  * @methods save : save a record the the database
  */
-const makeRecord = buildMakeRecord({});
+const Record = buildRecord({makeId});
 
 
 export {
-    makeUser,
-    makeRecord,
+    User,
+    Record,
     ResponseError
 };

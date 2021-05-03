@@ -1,6 +1,7 @@
 import { RecordInfos } from "../types";
+import RecordClass from "./RecordClass";
 
-export default function buildMakeRecord({}) {
+export default function buildRecord({makeId}) {
   const isValidId = (id: string) => true;
   const isValidDate = (date: Date) => true;
   const isValidPressure = (pressure: number) => true;
@@ -8,40 +9,72 @@ export default function buildMakeRecord({}) {
   const isValidHygrometry = (hygrometry: number) => true;
   const isValidBrightness = (brightness: number) => true;
 
-  return function makeRecord({
-    _id,
-    date,
-    pressure,
-    temperature,
-    hygrometry,
-    brightness,
-  }: RecordInfos) {
-    if (_id && !isValidId(_id)) {
-      throw new Error("Invalid id");
-    }
-    if (!isValidDate(date)) {
-      throw new Error("Invalid id");
-    }
-    if (!isValidPressure(pressure)) {
-      throw new Error("Invalid id");
-    }
-    if (!isValidTemperature(temperature)) {
-      throw new Error("Invalid id");
-    }
-    if (!isValidHygrometry(hygrometry)) {
-      throw new Error("Invalid id");
-    }
-    if (!isValidBrightness(brightness)) {
-      throw new Error("Invalid brightness");
+  class Record extends RecordClass {
+
+    constructor({
+      _id = makeId(),
+      date,
+      pressure,
+      temperature,
+      hygrometry,
+      brightness,
+    }) {
+      super({
+        _id,
+        date,
+        pressure,
+        temperature,
+        hygrometry,
+        brightness,
+      })
+
+      if (_id && !isValidId(_id)) {
+        throw Error("Invalid id");
+      }
+      if (!isValidDate(date)) {
+        throw Error("Invalid date");
+      }
+      if (!isValidPressure(pressure)) {
+        throw Error("Invalid pressure");
+      }
+      if (!isValidTemperature(temperature)) {
+        throw Error("Invalid temperature");
+      }
+      if (!isValidHygrometry(hygrometry)) {
+        throw Error("Invalid hygrometry");
+      }
+      if (!isValidBrightness(brightness)) {
+        throw Error("Invalid brightness");
+      }
+
     }
 
-    return Object.freeze({
-        getId: () => _id,
-        getDate: () => date,
-        getPressure: () => pressure,
-        getTemperature: () => temperature,
-        getHygrometry: () => hygrometry,
-        getBrightness: () => brightness,
-    });
-  };
+    public getId(){
+      return this._id;
+    };
+
+    public getPressure(){
+      return this.pressure;
+    }
+
+    public getDate() {
+      return this.date;
+    }
+
+    public getTemperature() {
+      return this.temperature;
+    }
+
+    public getHygrometry() {
+      return this.hygrometry;
+    }
+
+    public getBrightness() {
+      return this.brightness;
+    }
+
+  }
+
+  return Record;
+
 }

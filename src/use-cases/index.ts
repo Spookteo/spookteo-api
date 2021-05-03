@@ -1,17 +1,22 @@
-import {recordsDb, userDb} from "../data-access";
-import makeAddRecord from "./record/add-record";
+import makeGetRecords from "./record/get-records";
+import {recordsDb, userRepository} from "../data-access";
+import makeAddRecord from "./record/add-records";
 import makeAddUser from "./user/add-user";
+import makeTestAdmin from './user/test-admin';
 
 
-const USER_COLLECTION:string = 'users';
+const addUser = makeAddUser({userRepository});
 
-const addUser = makeAddUser({userDb});
+const addRecords = makeAddRecord({recordsDb});
 
-const addRecord = makeAddRecord({recordsDb});
+const getRecords = makeGetRecords({recordsDb});
 
+const testAdmin = makeTestAdmin({userRepository});
 
 
 export {
     addUser,
-    addRecord
+    addRecords,
+    getRecords,
+    testAdmin
 }

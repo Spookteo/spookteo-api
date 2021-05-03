@@ -14,23 +14,22 @@ interface MakeRecordDbOptions {
 export default function makeRecordDb({makeDb, collection}: MakeRecordDbOptions) {
 
     return Object.freeze({
-        saveRecord,
+        saveRecords,
         getRecords
     });
-    
 
     /**
      * This function save a record in the database
      * @param recordsInfos informations to save
      */
-    async function saveRecord(recordsInfos: RecordInfos) {
+     async function saveRecords(recordsInfos: RecordInfos[]) {
         const db = await makeDb();
 
         const result = await db
             .collection(collection)
-            .insertOne(recordsInfos);
+            .insertMany(recordsInfos);
             
-        const insertedInfos = result.ops[0];
+        const insertedInfos = result.ops;
         return insertedInfos;
     }
 

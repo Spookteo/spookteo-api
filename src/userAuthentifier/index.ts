@@ -6,6 +6,7 @@ export async function verifUser(login: string, key: string): Promise<{userId: st
     const salt = await userDb.getUserSalt({username: login});
 
     // If the user does not exists return null
+
     if (!salt) return null;
 
     // Encrypt the key
@@ -13,7 +14,7 @@ export async function verifUser(login: string, key: string): Promise<{userId: st
 
     // Check the validity of the credentials
     const user = await userDb.doesUserExists({username: login, key: hashedKey});
-
+    console.log({user});
     if (!user) return null;
 
     return {

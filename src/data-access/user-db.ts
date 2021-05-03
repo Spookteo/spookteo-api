@@ -1,5 +1,5 @@
 import { Db } from "mongodb";
-import { UserInfos } from "../types";
+import { Role, UserInfos } from "../types";
 
 interface MakeUserDbOptions {
   makeDb: () => Promise<Db>;
@@ -10,18 +10,15 @@ export default function makeUserDb({ makeDb, collection }: MakeUserDbOptions) {
   return Object.freeze({
     insert,
     getUserSalt,
-    doesUserExists
+    doesUserExists,
+    doesAdminExists
   });
 
   async function insert(user) {
     const db = await makeDb();
 
     const res = await db.collection(collection).insertOne({
-      _id: user.getId(),
-      username: user.getUsername(),
-      key: user.getKey(),
-      salt: user.getSalt(),
-      role: user.getRole()
+      ...user
     });
 
     return res.ops.length ? res.ops[0] : null;
@@ -54,6 +51,16 @@ export default function makeUserDb({ makeDb, collection }: MakeUserDbOptions) {
 
     const results =  await res.toArray();
 
+    console.log({results});
+
     return results.length ? results[0] : null;
+  }
+
+  async function doesAdminExists({}) {
+    const db = await makeDb();
+
+    const res = await db.collection(collection).find({ role: Role.ADMIN });
+
+    return await res.count() > 0;
   }
 }

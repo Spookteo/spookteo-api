@@ -10,12 +10,12 @@ const CRYPT_ALGORITHME = "sha512";
  * @param saltLength 
  * @returns 
  */
-export function generateRandomString(saltLength: number) {
+export function generateRandomString(size: number) {
   return (
-    randomBytes(Math.ceil(saltLength / 2))
+    randomBytes(Math.ceil(size / 2))
       //@ts-ignore
       .toString("HEX")
-      .slice(0, saltLength)
+      .slice(0, size)
   );
 }
 export function encryptString(password: string, salt: string) {

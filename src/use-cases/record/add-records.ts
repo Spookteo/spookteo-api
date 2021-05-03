@@ -2,9 +2,9 @@ import { GetRecordsOptions } from "../../data-access/record-db";
 import { makeRecord, ResponseError } from "../../models";
 import { RecordInfos } from "../../types";
 
-interface MakeAddRecordOptionsInterface {
+interface MakeAddRecordsOptionsInterface {
     recordsDb: {
-        saveRecord: (recordsInfos: RecordInfos) => Promise<any>;
+        saveRecords: (recordsInfos: RecordInfos[]) => Promise<any>;
         getRecords: ({}: GetRecordsOptions) => Promise<any[]>;
     }
 }
@@ -16,7 +16,7 @@ interface MakeAddRecordOptionsInterface {
  * 
  * @return a function to add a record in the database
  */
-export default function makeAddRecord({recordsDb}: MakeAddRecordOptionsInterface) {
+export default function makeAddRecords({recordsDb}: MakeAddRecordsOptionsInterface) {
     /**
      * @brief function to add a record in the database
      * 
@@ -26,36 +26,22 @@ export default function makeAddRecord({recordsDb}: MakeAddRecordOptionsInterface
      * 
      * @throws 500 : throws error 500 if the record cannot be register in the database
      */
-    return async function addRecord(recordInfo:RecordInfos):Promise<RecordInfos>{
+    return async function addRecords(recordsInfo:RecordInfos[]):Promise<RecordInfos>{
 
         // user creation with his data in parameters
-        const record = makeRecord(recordInfo);
 
-        const savedRecord = await recordsDb.saveRecord({
+        const records = recordsInfo.map(makeRecord)
+
+        const savedRecords = await recordsDb.saveRecords(records.map(record => ({
             _id: record.getId(),
-            date: record.getDate(),
-            pressure: record.getPressure(),
             temperature: record.getTemperature(),
-            hygrometry: record.getHygrometry(),
-            brightness: record.getBrightness()
-        });
-
-        if (savedRecord) {
-            return savedRecord
-        }
-        else {
-            throw new ResponseError("Problème lors de l'enregistrement du record", 500);
-        }
+            date: record.getDate(),
+            brightness: record.getBrightness(),
+            pressure: record.getPressure(),
+            hygrometry: record.getHygrometry()
+        })));
 
 
-
-        // user insertion in the database
-        
-
-        // if insertion succeed : return of user's info. Otherwise, throwing of a 500 error
-        
-
-        
-
+        return savedRecords;
     };
 };

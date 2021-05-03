@@ -1,12 +1,9 @@
-import { makeUser, ResponseError } from "../../models";
+import UserRepository from "../../data-access/userRepository";
+import { ResponseError, User } from "../../models";
 import { UserInfos } from "../../types";
 
 interface MakeAddUserOptionsInterface {
-    userDb: {
-        insert: (user:UserInfos)=>Promise<any>
-        getUserSalt: ({ username, }: { username: string; }) => Promise<string>;
-        doesUserExists: ({ username, key, }: { username: string; key: string; }) => Promise<any>;
-    }
+    userRepository: UserRepository;
 }
 
 /**
@@ -16,7 +13,7 @@ interface MakeAddUserOptionsInterface {
  * 
  * @return a function to add a user in the database
  */
-export default function makeAddUser({userDb}: MakeAddUserOptionsInterface) {
+export default function makeAddUser({userRepository}: MakeAddUserOptionsInterface) {
     /**
      * @brief function to add a user in the database
      * 
@@ -29,15 +26,15 @@ export default function makeAddUser({userDb}: MakeAddUserOptionsInterface) {
     return async function addUser(userInfo:UserInfos):Promise<UserInfos>{
 
         // user creation with his data in parameters
-        const user = makeUser(userInfo);
+        const user = new User(userInfo);
 
         // TODO : vérifier les informations du user (user non existant...)
 
         // user insertion in the database
-        const res = await userDb.insert({
+        const res = await userRepository.insert({
             _id: user.getId(),
             username: user.getUsername(),
-            key: user.getKey(),
+            key: user.getHashedKey(),
             salt: user.getSalt(),
             role: user.getRole()
         })
