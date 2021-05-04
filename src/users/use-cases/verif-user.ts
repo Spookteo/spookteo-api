@@ -14,7 +14,6 @@ export async function verifUser(login: string, key: string): Promise<{userId: st
 
     // Check the validity of the credentials
     const user = await userRepository.doesUserExists({username: login, key: hashedKey});
-    console.log({user});
     if (!user) return null;
 
     return {
