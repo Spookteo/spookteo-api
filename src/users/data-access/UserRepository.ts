@@ -1,9 +1,9 @@
-import UserClass from "../models/UserClass";
+import { UserInfos } from "../../types";
 import { UserSchema } from "../types";
 
-export default abstract class UserRepository {
+export abstract class UserRepository {
 
-  abstract insert(user: UserSchema): Promise<UserClass>;
+  abstract insert(user: UserSchema): Promise<UserInfos>;
 
   abstract getUserSalt({
     username,

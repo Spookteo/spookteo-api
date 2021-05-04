@@ -1,13 +1,13 @@
 import { Db } from "mongodb";
-import { Role, UserInfos, UserSchema } from "../types";
-import UserRepository from "./userRepository";
+import { Role, UserInfos, UserSchema } from "../../types";
+import {UserRepository} from "./UserRepository";
 
 export interface UserRepositoryMongoOptions {
   makeDb: () => Promise<Db>;
   collection: string;
 }
 
-export default class UserRepositoryMongo extends UserRepository {
+export class MongoUserRepository extends UserRepository {
     
     private collection: string;
     

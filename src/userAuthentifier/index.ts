@@ -1,9 +1,9 @@
-import { userDb } from "../data-access";
+import { userRepository } from "../users/data-access";
 import { encryptString } from "../tools/ecryptData";
 
 
 export async function verifUser(login: string, key: string): Promise<{userId: string, role: string}> {
-    const salt = await userDb.getUserSalt({username: login});
+    const salt = await userRepository.getUserSalt({username: login});
 
     // If the user does not exists return null
 
@@ -13,7 +13,7 @@ export async function verifUser(login: string, key: string): Promise<{userId: st
     const hashedKey = encryptString(key, salt);
 
     // Check the validity of the credentials
-    const user = await userDb.doesUserExists({username: login, key: hashedKey});
+    const user = await userRepository.doesUserExists({username: login, key: hashedKey});
     console.log({user});
     if (!user) return null;
 

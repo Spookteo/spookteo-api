@@ -1,4 +1,4 @@
-import UserRepository from "../../data-access/userRepository";
+import {UserRepository} from "../data-access";
 
 interface MakeTestAdminOptions {
     userRepository: UserRepository;

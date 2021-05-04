@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { postUser, getRecord, postRecords } from "./controllers";
-import makeCallback from "./express-callback";
 import { AuthenticationMiddleware } from "./middlewares";
+import { recordRouter } from "./records/express-config";
+import { userRouter } from "./users/express-config";
 
 
 const apiV0Router = Router();
@@ -9,16 +9,9 @@ const apiV0Router = Router();
 apiV0Router.use(AuthenticationMiddleware);
 
 // Users
-
-// create a new user
-apiV0Router.post('/user', makeCallback(postUser))
+apiV0Router.use('/user', userRouter);
 
 // Records
-
-// add new records
-apiV0Router.post('/record', makeCallback(postRecords));
-
-// get gecords
-apiV0Router.get('/record', makeCallback(getRecord))
+apiV0Router.use('/record', recordRouter);
 
 export default apiV0Router;

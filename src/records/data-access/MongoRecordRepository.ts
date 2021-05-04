@@ -1,32 +1,35 @@
 import { Db } from "mongodb";
 import { RecordInfos } from "../types";
+import { GetRecordsOptions, RecordRepository } from "./RecordRepository";
 
 
-export interface GetRecordsOptions {
-
-} 
 
 interface MakeRecordDbOptions {
     makeDb: () => Promise<Db>;
     collection: string;
 }
 
-export default function makeRecordDb({makeDb, collection}: MakeRecordDbOptions) {
+export class MongoRecordRepository extends RecordRepository implements MakeRecordDbOptions {
 
-    return Object.freeze({
-        saveRecords,
-        getRecords
-    });
+    makeDb: () => Promise<Db>;
+    collection: string;
+
+    constructor(options: MakeRecordDbOptions) {
+        super();
+        this.makeDb = options.makeDb;
+        this.collection = options.collection;
+    }
+
 
     /**
      * This function save a record in the database
      * @param recordsInfos informations to save
      */
-     async function saveRecords(recordsInfos: RecordInfos[]) {
-        const db = await makeDb();
+    async saveRecords(recordsInfos: RecordInfos[]) {
+        const db = await this.makeDb();
 
         const result = await db
-            .collection(collection)
+            .collection(this.collection)
             .insertMany(recordsInfos);
             
         const insertedInfos = result.ops;
@@ -37,12 +40,13 @@ export default function makeRecordDb({makeDb, collection}: MakeRecordDbOptions) 
      * This function return all records from the database
      * @param options Options passed
      */
-    async function getRecords({}: GetRecordsOptions) {
-        const db = await makeDb()
+    async getRecords({ }: GetRecordsOptions) {
+        const db = await this.makeDb()
         const result = await db 
-            .collection(collection)
+            .collection(this.collection)
             .find();
         
         return await result.toArray();
     }
+    
 }

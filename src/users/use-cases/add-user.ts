@@ -1,6 +1,7 @@
-import UserRepository from "../../data-access/userRepository";
-import { ResponseError, User } from "../../models";
+import {UserRepository} from "../data-access";
+import { ResponseError } from "../../models";
 import { UserInfos } from "../../types";
+import { User } from "../models";
 
 interface MakeAddUserOptionsInterface {
     userRepository: UserRepository;
@@ -32,20 +33,20 @@ export default function makeAddUser({userRepository}: MakeAddUserOptionsInterfac
 
         // user insertion in the database
         const res = await userRepository.insert({
-            _id: user.getId(),
-            username: user.getUsername(),
-            key: user.getHashedKey(),
-            salt: user.getSalt(),
-            role: user.getRole()
+            _id: user.id,
+            username: user.username,
+            key: user.hashedKey,
+            salt: user.salt,
+            role: user.role
         })
 
         // if insertion succeed : return of user's info. Otherwise, throwing of a 500 error
         if (res) {
             return {
-                _id: user.getId(),
-                username: user.getUsername(),
-                key: user.getKey(),
-                role: user.getRole()
+                _id: user.id,
+                username: user.username,
+                key: user.key,
+                role: user.role
             }
         }
         else {

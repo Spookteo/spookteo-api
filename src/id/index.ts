@@ -1,0 +1,1 @@
+export {makeId} from './makeId';

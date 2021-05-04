@@ -1,14 +1,14 @@
-import { HttpRequest, Role } from "../../types";
+import { HttpRequest } from "../../types";
 
 interface MakeGetRecord {
-    getRecords
+    listRecords
 }
 
-export default function makeGetRecord({getRecords}: MakeGetRecord) {
+export default function makeGetRecord({listRecords}: MakeGetRecord) {
     return async function getRecord(req:HttpRequest<{}, {}, {username: string, role: string}>):Promise<any> {
         // All users are authorize for Read
 
-        const records = (await getRecords({})).map(r => ({
+        const records = (await listRecords({})).map(r => ({
             _id: r.getId(),
             temperature: r.getTemperature(),
             date: r.getDate(),

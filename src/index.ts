@@ -2,7 +2,7 @@ import * as express from "express";
 import { AuthenticationMiddleware } from "./middlewares";
 import router from "./router";
 import { Role } from "./types";
-import { addUser, testAdmin } from "./use-cases";
+import { addUser, testAdmin } from "./users/use-cases";
 import * as cors from "cors";
 
 type SpoukteoApp = express.Express & {isReady?: Promise<void>};
