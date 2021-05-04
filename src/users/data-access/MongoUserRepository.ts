@@ -62,8 +62,6 @@ export class MongoUserRepository extends UserRepository {
 
     const results =  await res.toArray();
 
-    console.log({results});
-
     return results.length ? results[0] : null;
   }
 
