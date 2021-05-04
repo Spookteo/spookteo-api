@@ -1,5 +1,6 @@
-import { ResponseError } from "../../models";
-import { HttpRequest, Role } from "../../types";
+import { ResponseError } from "../../shared/express-tools";
+import { HttpRequest } from "@shared/express-tools";
+import {Role} from "@shared/types";
 
 interface MakePostRecord {
     addRecords

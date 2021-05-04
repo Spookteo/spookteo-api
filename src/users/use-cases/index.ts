@@ -10,3 +10,6 @@ export {
     addUser,
     testAdmin
 }
+
+export {validRole} from './validRole';
+export {verifUser} from './verif-user'

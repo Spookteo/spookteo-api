@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { DATABASE_NAME, DATABASE_URL } from "./environment";
+import { DATABASE_NAME, DATABASE_URL } from "@shared/environment";
 
 /**
  * Urlof the database (get from environment variables)

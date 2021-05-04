@@ -1,4 +1,4 @@
-import { makeId } from "../../id";
+import { makeId } from "../../shared/id";
 import { Record } from "./Record";
 
 Record.init({

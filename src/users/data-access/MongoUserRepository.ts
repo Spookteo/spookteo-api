@@ -1,6 +1,7 @@
 import { Db } from "mongodb";
-import { Role, UserInfos, UserSchema } from "../../types";
+import { UserSchema } from "@users/types";
 import {UserRepository} from "./UserRepository";
+import { Role } from "@shared/types";
 
 export interface UserRepositoryMongoOptions {
   makeDb: () => Promise<Db>;

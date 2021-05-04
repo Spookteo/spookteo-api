@@ -1,5 +1,5 @@
 import { MongoRecordRepository } from "./MongoRecordRepository";
-import { makeDb } from "../../tools/dbConnection";
+import { makeDb } from "@shared/database";
 
 import { RecordRepository } from "./RecordRepository";
 

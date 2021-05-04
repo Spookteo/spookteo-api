@@ -1,5 +1,5 @@
-import { userRepository } from "../users/data-access";
-import { encryptString } from "../tools/ecryptData";
+import { userRepository } from "@users/data-access";
+import { encryptString } from "@shared/encrypt-tools";
 
 
 export async function verifUser(login: string, key: string): Promise<{userId: string, role: string}> {

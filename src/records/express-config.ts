@@ -1,5 +1,5 @@
 import { Router } from "express";
-import makeCallback from "../express-callback";
+import {makeCallback} from "../shared/express-tools";
 import { getRecords, postRecords } from "./controllers";
 
 

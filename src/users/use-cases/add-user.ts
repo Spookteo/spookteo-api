@@ -1,6 +1,6 @@
 import {UserRepository} from "../data-access";
-import { ResponseError } from "../../models";
-import { UserInfos } from "../../types";
+import { ResponseError } from "../../shared/express-tools";
+import { UserInfos } from "@users/types";
 import { User } from "../models";
 
 interface MakeAddUserOptionsInterface {

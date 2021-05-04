@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthenticationMiddleware } from "./middlewares";
+import { AuthenticationMiddleware } from "./shared/express-tools/middlewares";
 import { recordRouter } from "./records/express-config";
 import { userRouter } from "./users/express-config";
 

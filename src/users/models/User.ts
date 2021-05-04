@@ -1,4 +1,4 @@
-import { Role } from "../../types";
+import { Role } from "@shared/types";
 
 const isValidId = (id: string) => true;
 const isValidUsername = (username: string) => true;

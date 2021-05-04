@@ -1,6 +1,6 @@
 const RESPONSE_ERROR_NAME = "ResponseError";
 
-export default class ResponseError extends Error {
+export class ResponseError extends Error {
   code: number;
 
   constructor(message: string, code: number) {

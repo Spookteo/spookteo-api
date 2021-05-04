@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import { AuthenticatedRequest } from "../types";
+import { NextFunction, Response } from "express";
+import { AuthenticatedRequest } from "@shared/express-tools/types";
 
 export default function buildAuthenticationMiddleware({verifUser}: {verifUser: (login: string, key: string) => Promise<{userId: string, role: string}>}) {
     return async function authenticationMiddleware(req: AuthenticatedRequest, res: Response, next: NextFunction) {

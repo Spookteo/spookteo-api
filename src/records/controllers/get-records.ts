@@ -1,4 +1,4 @@
-import { HttpRequest } from "../../types";
+import { HttpRequest } from "@shared/express-tools";
 
 interface MakeGetRecord {
     listRecords

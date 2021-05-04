@@ -1,5 +1,4 @@
-import { UserInfos } from "../../types";
-import { UserSchema } from "../types";
+import { UserInfos, UserSchema } from "@users/types";
 
 export abstract class UserRepository {
 

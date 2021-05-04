@@ -1,6 +1,6 @@
-import { getRole } from "../../tools/validRole";
+import { validRole } from "../use-cases";
 import { addUser } from "../use-cases";
 import makePostUser from "./post-user";
 
 
-export const postUser = makePostUser({addUser, getRole});
+export const postUser = makePostUser({addUser, validRole});

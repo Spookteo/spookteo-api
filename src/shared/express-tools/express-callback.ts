@@ -1,8 +1,8 @@
-import { HttpRequest } from "../types";
+import { HttpRequest } from "./types";
 
 const RESPONSE_ERROR_NAME = "ResponseError";
 
-export default function makeCallback(
+export function makeCallback(
   controller: (request: HttpRequest) => Promise<any>
 ) {
   return (req, res) => {

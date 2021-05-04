@@ -1,4 +1,4 @@
-import { verifUser } from "../userAuthentifier";
+import { verifUser } from "@users/use-cases";
 import buildAuthenticationMiddleware from "./authenticationMiddleware";
 
 

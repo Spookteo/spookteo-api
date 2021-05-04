@@ -1,12 +1,13 @@
-import { ResponseError } from "../../models";
-import {HttpRequest, Role, UserInfos} from "../../types";
+import { ResponseError, HttpRequest } from "@shared/express-tools";
+import {Role} from "@shared/types";
+import {UserInfos} from "@users/types";
 
 interface MakePostUserOptions {
     addUser:(userInfos:UserInfos) => Promise<UserInfos>,
-    getRole: (maybeRole: string) => Role
+    validRole: (maybeRole: string) => Role
 }
 
-export default function makePostUser({ addUser, getRole }: MakePostUserOptions) {
+export default function makePostUser({ addUser, validRole }: MakePostUserOptions) {
     return async function postUser(req:HttpRequest<{}, {}, {username: string, role: string}>):Promise<{user: UserInfos}> {
 
         // Verify arguments
@@ -17,7 +18,7 @@ export default function makePostUser({ addUser, getRole }: MakePostUserOptions) 
         // Parse the request
         const user: UserInfos = {
             username: req.body.username,
-            role: getRole(req.body.role),
+            role: validRole(req.body.role),
         }
         
         // Return an error if the role is not valid

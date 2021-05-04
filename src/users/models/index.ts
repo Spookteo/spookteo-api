@@ -1,5 +1,5 @@
-import { encryptString, generateRandomString } from "../../tools/ecryptData";
-import {makeId} from "../../id";
+import { encryptString, generateRandomString } from "@shared/encrypt-tools";
+import {makeId} from "../../shared/id";
 import { User } from "./User";
 
 

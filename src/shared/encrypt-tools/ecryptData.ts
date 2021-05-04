@@ -18,6 +18,8 @@ export function generateRandomString(size: number) {
       .slice(0, size)
   );
 }
+
+
 export function encryptString(password: string, salt: string) {
   const hash = createHmac(CRYPT_ALGORITHME, salt);
   hash.update(password);

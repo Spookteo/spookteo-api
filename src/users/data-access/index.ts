@@ -1,5 +1,5 @@
 import { MongoUserRepository } from "./MongoUserRepository";
-import { makeDb } from "../../tools/dbConnection";
+import { makeDb } from "@shared/database";
 
 import { UserRepository } from "./UserRepository";
 

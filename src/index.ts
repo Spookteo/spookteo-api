@@ -1,7 +1,7 @@
 import * as express from "express";
-import { AuthenticationMiddleware } from "./middlewares";
+import { AuthenticationMiddleware } from "./shared/express-tools";
 import router from "./router";
-import { Role } from "./types";
+import { Role } from "@shared/types";
 import { addUser, testAdmin } from "./users/use-cases";
 import * as cors from "cors";
 

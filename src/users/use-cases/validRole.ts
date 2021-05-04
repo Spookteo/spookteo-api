@@ -1,6 +1,6 @@
 import { Role } from "../types";
 
-export function getRole(maybeRole: string): Role {
+export function validRole(maybeRole: string): Role {
   switch (maybeRole) {
     case Role.ADMIN:
       return Role.ADMIN;
