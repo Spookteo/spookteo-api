@@ -2,7 +2,7 @@ import { userRepository } from "@users/data-access";
 import { encryptString } from "@shared/encrypt-tools";
 
 
-export async function verifUser(login: string, key: string): Promise<{userId: string, role: string}> {
+export async function verifUser(login: string, key: string): Promise<{userId: string, role: string, username: string}> {
     const salt = await userRepository.getUserSalt({username: login});
 
     // If the user does not exists return null
@@ -18,6 +18,7 @@ export async function verifUser(login: string, key: string): Promise<{userId: st
 
     return {
         userId: user._id,
-        role: user.role
+        role: user.role,
+        username: user.username
     }
 }

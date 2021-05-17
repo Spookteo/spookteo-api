@@ -10,6 +10,7 @@ const isValidPressure = (pressure: number) => true;
 const isValidTemperature = (temperature: number[]) => true;
 const isValidHygrometry = (hygrometry: number) => true;
 const isValidBrightness = (brightness: number) => true;
+const isValidUsername = (username: string) => true;
 
 export class Record {
   protected static makeId: () => string;
@@ -24,8 +25,9 @@ export class Record {
   protected _temperature: number[];
   protected _hygrometry: number;
   protected _brightness: number;
+  protected _username: string;
 
-  constructor({ _id = Record.makeId(), date, pressure, temperature, hygrometry, brightness }) {
+  constructor({ _id = Record.makeId(), date, pressure, temperature, hygrometry, brightness, username }) {
     if (!isValidId(_id)) {
       throw Error("Invalid id");
     }
@@ -44,6 +46,9 @@ export class Record {
     if (!isValidBrightness(brightness)) {
       throw Error("Invalid brightness");
     }
+    if (!isValidUsername(username)) {
+      throw Error("Invalid brightness");
+    }
 
     this._id = _id;
     this._date = date;
@@ -51,6 +56,7 @@ export class Record {
     this._temperature = temperature;
     this._hygrometry = hygrometry;
     this._brightness = brightness;
+    this._username = username;
   }
 
   get id(): string {
@@ -70,5 +76,8 @@ export class Record {
   }
   get brightness(): number {
     return this._brightness;
+  }
+  get username(): string {
+    return this._username;
   }
 }

@@ -10,11 +10,11 @@ export function makePostRecords({addRecords}: MakePostRecord) {
     return async function postRecords(req:HttpRequest<{}, {}, Array<{date:Date; pressure:number; temperature:Array<number>; hygrometry:number; brightness:number;}>>):Promise<any> {
 
         // Verify the rights
-        if (req.role == Role.READ) {
+        if (req.user.role == Role.READ) {
             throw new ResponseError("UNAUTHORIZED", 403);
         }
 
-        const records = addRecords(req.body);
+        const records = await addRecords({recordsInfos: req.body, user: req.user});
 
         return {records}
     } 

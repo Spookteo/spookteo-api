@@ -8,7 +8,7 @@ export function buildRoleMiddleware(role: Role) {
     res: Response,
     next: NextFunction
   ) {
-    if (req.user.role !== role) {
+    if (req.user.role !== role && req.user.role !== Role.ADMIN) {
       return res.status(401).json({ status: "ko", message: "UNAUTHORIZED" });
     }
     return next();

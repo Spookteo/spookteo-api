@@ -27,7 +27,7 @@ export default function makePostUser({ addUser, validRole }: MakePostUserOptions
         }
         
         // Verify the rights
-        if (req.role != Role.ADMIN) {
+        if (req.user.role != Role.ADMIN) {
             throw new ResponseError("UNAUTHORIZED", 403); 
         }
 
