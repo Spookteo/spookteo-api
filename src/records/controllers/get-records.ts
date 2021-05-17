@@ -6,10 +6,12 @@ interface MakeGetRecord {
 }
 
 export default function makeGetRecord({listRecords}: MakeGetRecord) {
-    return async function getRecord(req:HttpRequest<{}, {}, {username: string, role: string}>):Promise<any> {
-        // All users are authorize for Read
+    return async function getRecord(req:HttpRequest<{}, {user?: string}, {}>):Promise<any> {
 
-        const records = (await listRecords({})).map((r: Record) => ({
+        const {user} = req.query;
+
+        // All users are authorize for Read
+        const records = (await listRecords({user})).map((r: Record) => ({
             _id: r.id,
             temperature: r.temperature,
             date: r.date,

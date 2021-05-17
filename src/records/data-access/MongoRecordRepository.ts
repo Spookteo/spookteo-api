@@ -1,4 +1,4 @@
-import { Db } from "mongodb";
+import { Db, FilterQuery } from "mongodb";
 import { RecordInfos } from "../types";
 import { GetRecordsOptions, RecordRepository } from "./RecordRepository";
 
@@ -40,11 +40,16 @@ export class MongoRecordRepository extends RecordRepository implements MakeRecor
      * This function return all records from the database
      * @param options Options passed
      */
-    async getRecords({ }: GetRecordsOptions) {
+    async getRecords({ user }: GetRecordsOptions) {
+
+        const query: FilterQuery<any> = {};
+
+        if (user) query.username = user;
+
         const db = await this.makeDb()
         const result = await db 
             .collection(this.collection)
-            .find();
+            .find(query);
         
         return await result.toArray();
     }
