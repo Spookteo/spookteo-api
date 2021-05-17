@@ -1,3 +1,4 @@
+import { Record } from "@records/models";
 import { HttpRequest } from "@shared/express-tools";
 
 interface MakeGetRecord {
@@ -8,13 +9,14 @@ export default function makeGetRecord({listRecords}: MakeGetRecord) {
     return async function getRecord(req:HttpRequest<{}, {}, {username: string, role: string}>):Promise<any> {
         // All users are authorize for Read
 
-        const records = (await listRecords({})).map(r => ({
-            _id: r.getId(),
-            temperature: r.getTemperature(),
-            date: r.getDate(),
-            brightness: r.getBrightness(),
-            pressure: r.getPressure(),
-            hygrometry: r.getHygrometry(),
+        const records = (await listRecords({})).map((r: Record) => ({
+            _id: r.id,
+            temperature: r.temperature,
+            date: r.date,
+            brightness: r.brightness,
+            pressure: r.pressure,
+            hygrometry: r.hygrometry,
+            user: r.username
         }));
 
         return {records};
