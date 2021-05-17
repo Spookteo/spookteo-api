@@ -12,7 +12,7 @@ export default function makeListRecords({
   /**
    * TODO : comment and type !
    */
-  return async function listRecords({}: any): Promise<any[]> {
-    return (await recordRepository.getRecords({})).map(record => new Record(record));
+  return async function listRecords({user}: any): Promise<any[]> {
+    return (await recordRepository.getRecords({user})).map(record => new Record(record));
   };
 }

@@ -10,8 +10,7 @@ export function makeCallback(
       body: req.body,
       params: req.params,
       query: req.query,
-      role: req.role,
-      userId: req.userId
+      user: req.user
     };
     // Execute the controller function
     controller(httpRequest)
