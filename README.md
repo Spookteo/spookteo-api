@@ -1,9 +1,32 @@
 # Spouk-teo API
 
+## Déploiement
+Pour déployer l'API vous aurrez besoin de Node en version pas trop vielle et d'une base MongoDB. 
+
+Ajoutez un fichier `.env` avec ce contenu : 
+```bash
+DATABASE_URL="<database_url_with_port>" # Exemple : "mongodb://localhost:27017"
+DATABASE_NAME="<nom_de_la_bdd>" # Exemple : "ma_db"
+```
+
+Puis executez : 
+```bash
+npm install
+npm run build
+npm start
+```
+
+### Cas particuliers
+#### Changer le port du server
+Dans le `.env`
+```
+PORT=1234
+```
+
 ## Utilisation
 
 ### Authentification
-Pour accéder à l'API vous aurez besoin d'un compte. Pour se faire, contactez nous à l'addresse anthony.quere@lacatholille.fr.
+Pour accéder à l'API vous aurez besoin d'un compte. Pour ce faire, contactez nous à l'addresse anthony.quere@lacatholille.fr.
 
 Vos credentials contiennent un nom d'utilisateur et un mot de passe.
 
@@ -18,7 +41,7 @@ X-Access-Key: <key>
 ### Ajouter un record
 
 ```
-POST : https://spookteo-api.herokuapp.com/api/v0/records
+POST : https://spookteo-api.herokuapp.com/api/v0/record
 Body :
 [
     {
@@ -76,7 +99,7 @@ Reponse :
 ### Récupérer des records
 
 ```
-GET : https://spookteo-api.herokuapp.com/api/v0/records
+GET : https://spookteo-api.herokuapp.com/api/v0/record
 Parametres de reqête optionel :
     - user [string] un nom d'utilisateur pour filtrer les resultats (ex: https://spookteo-api.herokuapp.com/api/v0/records?user=testuser)
 
