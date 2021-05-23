@@ -35,6 +35,7 @@ Vous devrez indiquer **pour chaque requête** vos identifiants dans le header :
 ```
 X-Access-User: <username>
 X-Access-Key: <key>
+Content-Type: application/json
 ```
 
 
