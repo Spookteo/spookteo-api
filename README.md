@@ -1,5 +1,7 @@
 # Spouk-teo API
 
+Attention, vous devez préciser dans le rapport et pendant la soutenance que l'API a été réalisé par Anthony Quéré, Kilian Debraux et Adrien Ducourthial. Si vous utilisez des données provenants d'autres groupes, vous devrez le préciser dans le rapport et pendantla soutenance.
+
 ## Déploiement
 Pour déployer l'API vous aurrez besoin de Node en version pas trop vielle et d'une base MongoDB. 
 
